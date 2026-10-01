@@ -1,0 +1,151 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "live_detail_table",
+  "position": {
+    "x": 40,
+    "y": 575,
+    "z": 4,
+    "width": 1300,
+    "height": 465,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "subscription_id"
+                }
+              },
+              "queryRef": "FactLiveActivity.subscription_id",
+              "nativeQueryRef": "subscription_id",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "plan_name"
+                }
+              },
+              "queryRef": "FactLiveActivity.plan_name",
+              "nativeQueryRef": "plan_name",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "FactLiveActivity.status",
+              "nativeQueryRef": "status",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "active_users"
+                }
+              },
+              "queryRef": "FactLiveActivity.active_users",
+              "nativeQueryRef": "active_users",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "current_feature"
+                }
+              },
+              "queryRef": "FactLiveActivity.current_feature",
+              "nativeQueryRef": "current_feature",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "session_duration_min"
+                }
+              },
+              "queryRef": "FactLiveActivity.session_duration_min",
+              "nativeQueryRef": "session_duration_min",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactLiveActivity"
+                    }
+                  },
+                  "Property": "api_requests_last_hour"
+                }
+              },
+              "queryRef": "FactLiveActivity.api_requests_last_hour",
+              "nativeQueryRef": "api_requests_last_hour",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Live Subscription Activity Feed'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,91 @@
+table DimSubscription
+
+	column subscription_id
+		dataType: string
+		isKey
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+	column account_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: account_id
+
+	column plan_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: plan_name
+
+	column plan_tier
+		dataType: string
+		summarizeBy: none
+		sourceColumn: plan_tier
+
+	column billing_cycle
+		dataType: string
+		summarizeBy: none
+		sourceColumn: billing_cycle
+
+	column annual_value_eur
+		dataType: double
+		summarizeBy: none
+		sourceColumn: annual_value_eur
+
+	column mrr_eur
+		dataType: double
+		summarizeBy: none
+		sourceColumn: mrr_eur
+
+	column start_date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: start_date
+
+	column end_date
+		dataType: string
+		summarizeBy: none
+		sourceColumn: end_date
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column age_months
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: age_months
+
+	column max_users
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: max_users
+
+	column country
+		dataType: string
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: country
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+
+	partition DimSubscription = m
+		mode: import
+		source =
+			let
+			    Source = Csv.Document(ReadProjectFile("raw/subscriptions.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			    Types = Table.TransformColumnTypes(Headers, {
+			        {"subscription_id", type text}, {"account_id", type text}, {"plan_name", type text},
+			        {"plan_tier", type text}, {"billing_cycle", type text}, {"annual_value_eur", type number},
+			        {"mrr_eur", type number}, {"start_date", type date}, {"end_date", type text},
+			        {"status", type text}, {"age_months", Int64.Type}, {"max_users", Int64.Type},
+			        {"country", type text}, {"region", type text}
+			    }, "en-US"),
+			    NormalizedCountry = Table.TransformColumns(Types, {{"country", NormalizeCountry}}),
+			    Deduplicated = Table.Distinct(NormalizedCountry, {"subscription_id"})
+			in
+			    Deduplicated

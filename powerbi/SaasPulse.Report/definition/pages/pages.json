@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "executive_overview",
+    "revenue_analytics",
+    "churn_retention",
+    "account_portfolio",
+    "engagement_product",
+    "support_operations",
+    "refunds_analysis",
+    "geographic_analysis",
+    "plan_performance",
+    "live_activity_dashboard",
+    "advanced_analytics",
+    "smart_narrative_overview"
+  ],
+  "activePageName": "executive_overview"
+}

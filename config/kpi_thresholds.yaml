@@ -1,0 +1,25 @@
+revenue:
+  mrr_growth_target_pct: 0.05
+  net_revenue_retention_target_pct: 1.10
+  gross_revenue_retention_target_pct: 0.90
+
+churn:
+  monthly_churn_rate_warning_pct: 0.03
+  monthly_churn_rate_critical_pct: 0.06
+  logo_churn_warning_pct: 0.02
+  logo_churn_critical_pct: 0.05
+
+support:
+  first_contact_resolution_target_pct: 0.75
+  critical_ticket_sla_hours: 4.0
+  high_ticket_sla_hours: 24.0
+  medium_ticket_sla_hours: 72.0
+
+engagement:
+  dau_mau_target_pct: 0.40
+  feature_adoption_target_pct: 0.60
+  nps_target: 40
+
+efficiency:
+  ltv_cac_ratio_target: 3.0
+  payback_period_months_target: 12

@@ -1,0 +1,68 @@
+table FactLiveActivity
+
+	column subscription_id
+		dataType: string
+		isKey
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+	column account_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: account_id
+
+	column plan_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: plan_name
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column active_users
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: active_users
+
+	column max_users
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: max_users
+
+	column current_feature
+		dataType: string
+		summarizeBy: none
+		sourceColumn: current_feature
+
+	column session_duration_min
+		dataType: double
+		summarizeBy: none
+		sourceColumn: session_duration_min
+
+	column api_requests_last_hour
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: api_requests_last_hour
+
+	column last_updated
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: last_updated
+
+	partition FactLiveActivity = m
+		mode: import
+		source =
+			let
+			    Source = Csv.Document(ReadProjectFile("raw/live_activity.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			    Types = Table.TransformColumnTypes(Headers, {
+			        {"subscription_id", type text}, {"account_id", type text}, {"plan_name", type text},
+			        {"status", type text}, {"active_users", Int64.Type}, {"max_users", Int64.Type},
+			        {"current_feature", type text}, {"session_duration_min", type number},
+			        {"api_requests_last_hour", Int64.Type}, {"last_updated", type datetimezone}
+			    }, "en-US"),
+			    Deduplicated = Table.Distinct(Types, {"subscription_id"})
+			in
+			    Deduplicated

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "live_summary_card",
+  "position": {
+    "x": 1360,
+    "y": 820,
+    "z": 6,
+    "width": 520,
+    "height": 220,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "multiRowCard",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Active Sessions"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Active Sessions",
+              "nativeQueryRef": "Live Active Sessions",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Total Active Users"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Total Active Users",
+              "nativeQueryRef": "Live Total Active Users",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live API Requests/Hour"
+                }
+              },
+              "queryRef": "KPI_Measures.Live API Requests/Hour",
+              "nativeQueryRef": "Live API Requests/Hour",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Live Platform Summary'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

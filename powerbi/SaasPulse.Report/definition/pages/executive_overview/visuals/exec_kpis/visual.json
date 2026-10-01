@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "exec_kpis",
+  "position": {
+    "x": 40,
+    "y": 25,
+    "z": 0,
+    "width": 1340,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Active Subscriptions"
+                }
+              },
+              "queryRef": "KPI_Measures.Active Subscriptions",
+              "nativeQueryRef": "Active Subscriptions",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Total ARR EUR"
+                }
+              },
+              "queryRef": "KPI_Measures.Total ARR EUR",
+              "nativeQueryRef": "Total ARR EUR",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Churn Rate %"
+                }
+              },
+              "queryRef": "KPI_Measures.Churn Rate %",
+              "nativeQueryRef": "Churn Rate %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "First Contact Resolution %"
+                }
+              },
+              "queryRef": "KPI_Measures.First Contact Resolution %",
+              "nativeQueryRef": "First Contact Resolution %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average NPS Score"
+                }
+              },
+              "queryRef": "KPI_Measures.Average NPS Score",
+              "nativeQueryRef": "Average NPS Score",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Revenue at Risk EUR"
+                }
+              },
+              "queryRef": "KPI_Measures.Revenue at Risk EUR",
+              "nativeQueryRef": "Revenue at Risk EUR",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

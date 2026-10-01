@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "support_kpis",
+  "position": {
+    "x": 40,
+    "y": 25,
+    "z": 0,
+    "width": 1840,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Support Tickets"
+                }
+              },
+              "queryRef": "KPI_Measures.Support Tickets",
+              "nativeQueryRef": "Support Tickets",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Open Tickets"
+                }
+              },
+              "queryRef": "KPI_Measures.Open Tickets",
+              "nativeQueryRef": "Open Tickets",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Critical Tickets"
+                }
+              },
+              "queryRef": "KPI_Measures.Critical Tickets",
+              "nativeQueryRef": "Critical Tickets",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "First Contact Resolution %"
+                }
+              },
+              "queryRef": "KPI_Measures.First Contact Resolution %",
+              "nativeQueryRef": "First Contact Resolution %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Escalation Rate %"
+                }
+              },
+              "queryRef": "KPI_Measures.Escalation Rate %",
+              "nativeQueryRef": "Escalation Rate %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average Resolution Hours"
+                }
+              },
+              "queryRef": "KPI_Measures.Average Resolution Hours",
+              "nativeQueryRef": "Average Resolution Hours",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

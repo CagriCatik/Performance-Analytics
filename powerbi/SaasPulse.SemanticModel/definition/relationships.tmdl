@@ -1,0 +1,47 @@
+relationship 'metrics-date'
+	fromColumn: FactMonthlyMetrics.month_date
+	toColumn: DimDate.date
+
+relationship 'metrics-subscription'
+	fromColumn: FactMonthlyMetrics.subscription_id
+	toColumn: DimSubscription.subscription_id
+
+relationship 'events-date'
+	fromColumn: FactSubscriptionEvents.event_date
+	toColumn: DimDate.date
+
+relationship 'events-subscription'
+	fromColumn: FactSubscriptionEvents.subscription_id
+	toColumn: DimSubscription.subscription_id
+
+relationship 'tickets-date'
+	fromColumn: FactSupportTickets.opened_date
+	toColumn: DimDate.date
+
+relationship 'tickets-subscription'
+	fromColumn: FactSupportTickets.subscription_id
+	toColumn: DimSubscription.subscription_id
+
+relationship 'refunds-date'
+	fromColumn: FactRefunds.claim_date
+	toColumn: DimDate.date
+
+relationship 'refunds-subscription'
+	fromColumn: FactRefunds.subscription_id
+	toColumn: DimSubscription.subscription_id
+
+relationship 'subscription-account'
+	fromColumn: DimSubscription.account_id
+	toColumn: DimAccount.account_id
+
+relationship 'subscription-plan'
+	fromColumn: DimSubscription.plan_name
+	toColumn: DimPlan.plan_name
+
+relationship 'subscription-region'
+	fromColumn: DimSubscription.region
+	toColumn: DimRegion.region
+
+relationship 'live-subscription'
+	fromColumn: FactLiveActivity.subscription_id
+	toColumn: DimSubscription.subscription_id

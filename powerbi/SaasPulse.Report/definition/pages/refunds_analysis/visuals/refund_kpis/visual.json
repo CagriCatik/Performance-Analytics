@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "refund_kpis",
+  "position": {
+    "x": 40,
+    "y": 25,
+    "z": 0,
+    "width": 1840,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Refund Requests"
+                }
+              },
+              "queryRef": "KPI_Measures.Refund Requests",
+              "nativeQueryRef": "Refund Requests",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Approved Refunds"
+                }
+              },
+              "queryRef": "KPI_Measures.Approved Refunds",
+              "nativeQueryRef": "Approved Refunds",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Refund Approval %"
+                }
+              },
+              "queryRef": "KPI_Measures.Refund Approval %",
+              "nativeQueryRef": "Refund Approval %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Refund Amount EUR"
+                }
+              },
+              "queryRef": "KPI_Measures.Refund Amount EUR",
+              "nativeQueryRef": "Refund Amount EUR",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average Refund EUR"
+                }
+              },
+              "queryRef": "KPI_Measures.Average Refund EUR",
+              "nativeQueryRef": "Average Refund EUR",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Refund Rate %"
+                }
+              },
+              "queryRef": "KPI_Measures.Refund Rate %",
+              "nativeQueryRef": "Refund Rate %",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,107 @@
+seed: 42
+
+time_range:
+  start: "2025-01-01"
+  end: "2025-12-31"
+
+dataset:
+  accounts: 400
+  subscriptions: 600
+  support_tickets: 2400
+  subscription_events: 1800
+  refunds: 300
+
+anomalies:
+  enabled: true
+  churned_account_ratio: 0.12
+  high_churn_plan_ratio: 0.08
+
+data_quality:
+  enabled: true
+  inconsistent_text_ratio: 0.015
+  missing_optional_ratio: 0.008
+  duplicate_ratio: 0.004
+
+output:
+  raw_dir: "data/raw"
+  reference_dir: "data/reference"
+  log_dir: "logs"
+
+live_feed:
+  update_interval_seconds: 30
+  output_file: "data/raw/live_activity.csv"
+  server:
+    host: "127.0.0.1"
+    port: 8080
+
+domain_rules:
+  accounts:
+    segments: ["SMB", "Mid-Market", "Enterprise"]
+    segment_weights: [0.55, 0.30, 0.15]
+    industries:
+      - name: Technology
+        weight: 0.28
+      - name: Financial Services
+        weight: 0.18
+      - name: Healthcare
+        weight: 0.14
+      - name: Retail
+        weight: 0.12
+      - name: Manufacturing
+        weight: 0.10
+      - name: Education
+        weight: 0.09
+      - name: Media & Entertainment
+        weight: 0.09
+    coordinate_jitter: 0.10
+
+  subscriptions:
+    billing_cycles: ["Monthly", "Annual"]
+    billing_cycle_weights: [0.45, 0.55]
+    age_factor_annual: 0.10
+
+  monthly_metrics:
+    active_users_mean: 0.65
+    active_users_std: 0.18
+    api_calls_base: 12000
+    api_calls_std: 5000
+    storage_gb_base: 4.5
+    storage_gb_std: 2.0
+    feature_adoption_mean: 0.58
+    feature_adoption_std: 0.20
+    nps_mean: 32.0
+    nps_std: 18.0
+
+  support_tickets:
+    categories: ["Billing", "Technical", "Onboarding", "Feature Request", "Security", "Integration"]
+    severities: ["Low", "Medium", "High", "Critical"]
+    severity_weights: [0.40, 0.35, 0.18, 0.07]
+    severity_factors:
+      Low: 0.7
+      Medium: 1.0
+      High: 1.8
+      Critical: 3.2
+    resolution_mean_hours: 14.0
+    resolution_std_hours: 10.0
+    first_contact_resolution_rate: 0.72
+
+  subscription_events:
+    event_types: ["Upgrade", "Downgrade", "Renewal", "Churn", "Reactivation"]
+    event_weights: [0.22, 0.10, 0.45, 0.16, 0.07]
+
+  refunds:
+    reasons: ["Service Outage", "Billing Error", "Cancellation Refund", "Duplicate Charge", "Dissatisfaction"]
+    reason_weights: [0.20, 0.25, 0.30, 0.15, 0.10]
+    approval_probability: 0.88
+
+  data_quality:
+    country_variants:
+      Germany: ["Germany", "GERMANY", "DE", "Deutschland", " Germany "]
+      France: ["France", "FRANCE", "FR", " France "]
+      Spain: ["Spain", "SPAIN", "ES", " Spain "]
+      Italy: ["Italy", "ITALY", "IT", " Italy "]
+      Austria: ["Austria", "AT", " Austria "]
+      Switzerland: ["Switzerland", "CH", " Switzerland "]
+      Belgium: ["Belgium", "BE", " Belgium "]
+      Netherlands: ["Netherlands", "NL", " Netherlands "]
+    optional_fields: ["resolved_at"]

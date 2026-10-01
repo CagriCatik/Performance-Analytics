@@ -1,0 +1,73 @@
+table FactSubscriptionEvents
+
+	column event_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event_id
+
+	column subscription_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+	column account_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: account_id
+
+	column event_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event_type
+
+	column event_date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: event_date
+
+	column event_timestamp
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: event_timestamp
+
+	column from_plan
+		dataType: string
+		summarizeBy: none
+		sourceColumn: from_plan
+
+	column to_plan
+		dataType: string
+		summarizeBy: none
+		sourceColumn: to_plan
+
+	column mrr_change_eur
+		dataType: double
+		summarizeBy: none
+		sourceColumn: mrr_change_eur
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+
+	column country
+		dataType: string
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: country
+
+	partition FactSubscriptionEvents = m
+		mode: import
+		source =
+			let
+			    Source = Csv.Document(ReadProjectFile("raw/subscription_events.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			    Types = Table.TransformColumnTypes(Headers, {
+			        {"event_id", type text}, {"subscription_id", type text}, {"account_id", type text},
+			        {"event_type", type text}, {"event_date", type date}, {"event_timestamp", type datetime},
+			        {"from_plan", type text}, {"to_plan", type text}, {"mrr_change_eur", type number},
+			        {"region", type text}, {"country", type text}
+			    }, "en-US"),
+			    NormalizedCountry = Table.TransformColumns(Types, {{"country", NormalizeCountry}})
+			in
+			    NormalizedCountry

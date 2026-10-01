@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "churn_kpis",
+  "position": {
+    "x": 40,
+    "y": 25,
+    "z": 0,
+    "width": 1840,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Churned Subscriptions"
+                }
+              },
+              "queryRef": "KPI_Measures.Churned Subscriptions",
+              "nativeQueryRef": "Churned Subscriptions",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Churn Rate %"
+                }
+              },
+              "queryRef": "KPI_Measures.Churn Rate %",
+              "nativeQueryRef": "Churn Rate %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Logo Churn Rate %"
+                }
+              },
+              "queryRef": "KPI_Measures.Logo Churn Rate %",
+              "nativeQueryRef": "Logo Churn Rate %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Churn Events"
+                }
+              },
+              "queryRef": "KPI_Measures.Churn Events",
+              "nativeQueryRef": "Churn Events",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Downgrade Events"
+                }
+              },
+              "queryRef": "KPI_Measures.Downgrade Events",
+              "nativeQueryRef": "Downgrade Events",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Renewal Events"
+                }
+              },
+              "queryRef": "KPI_Measures.Renewal Events",
+              "nativeQueryRef": "Renewal Events",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

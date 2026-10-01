@@ -1,0 +1,73 @@
+table FactRefunds
+
+	column refund_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: refund_id
+
+	column ticket_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ticket_id
+
+	column subscription_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+	column account_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: account_id
+
+	column claim_date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: claim_date
+
+	column reason
+		dataType: string
+		summarizeBy: none
+		sourceColumn: reason
+
+	column amount_eur
+		dataType: double
+		summarizeBy: none
+		sourceColumn: amount_eur
+
+	column approved
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: approved
+
+	column plan_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: plan_name
+
+	column country
+		dataType: string
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: country
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+
+	partition FactRefunds = m
+		mode: import
+		source =
+			let
+			    Source = Csv.Document(ReadProjectFile("raw/refunds.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			    Types = Table.TransformColumnTypes(Headers, {
+			        {"refund_id", type text}, {"ticket_id", type text}, {"subscription_id", type text},
+			        {"account_id", type text}, {"claim_date", type date}, {"reason", type text},
+			        {"amount_eur", type number}, {"approved", type logical}, {"plan_name", type text},
+			        {"country", type text}, {"region", type text}
+			    }, "en-US"),
+			    NormalizedCountry = Table.TransformColumns(Types, {{"country", NormalizeCountry}})
+			in
+			    NormalizedCountry

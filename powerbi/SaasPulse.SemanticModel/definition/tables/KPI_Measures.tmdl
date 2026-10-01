@@ -1,0 +1,218 @@
+table KPI_Measures
+
+	column measure_table_key
+
+		dataType: int64
+
+		sourceColumn: measure_table_key
+
+		isHidden
+
+		summarizeBy: none
+
+	measure 'Accounts' = DISTINCTCOUNT(DimAccount[account_id])
+		formatString: #,0
+
+	measure 'Active Subscriptions' = CALCULATE(DISTINCTCOUNT(DimSubscription[subscription_id]), DimSubscription[status] = "Active")
+		formatString: #,0
+
+	measure 'Total Subscriptions' = DISTINCTCOUNT(DimSubscription[subscription_id])
+		formatString: #,0
+
+	measure 'Churned Subscriptions' = CALCULATE(DISTINCTCOUNT(DimSubscription[subscription_id]), DimSubscription[status] = "Churned")
+		formatString: #,0
+
+	measure 'Trial Subscriptions' = CALCULATE(DISTINCTCOUNT(DimSubscription[subscription_id]), DimSubscription[status] = "Trial")
+		formatString: #,0
+
+	measure 'Suspended Subscriptions' = CALCULATE(DISTINCTCOUNT(DimSubscription[subscription_id]), DimSubscription[status] = "Suspended")
+		formatString: #,0
+
+	measure 'Total ARR EUR' = SUMX(FILTER(DimSubscription, DimSubscription[status] = "Active"), DimSubscription[annual_value_eur])
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Total MRR EUR' = SUMX(FILTER(DimSubscription, DimSubscription[status] = "Active"), DimSubscription[mrr_eur])
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Average MRR per Subscription EUR' = DIVIDE([Total MRR EUR], [Active Subscriptions])
+		formatString: €#,0.00;(-€#,0.00);€0
+
+	measure 'Monthly Revenue EUR' = SUM(FactMonthlyMetrics[mrr_eur])
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Revenue at Risk EUR' = SUM(FactMonthlyMetrics[revenue_at_risk_eur])
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Revenue at Risk %' = DIVIDE([Revenue at Risk EUR], [Monthly Revenue EUR])
+		formatString: 0.0%
+
+	measure 'Churn Rate %' = DIVIDE([Churned Subscriptions], [Total Subscriptions])
+		formatString: 0.0%
+
+	measure 'Logo Churn Rate %' = ```
+			VAR TotalAccounts = DISTINCTCOUNT(DimAccount[account_id])
+			VAR ChurnedAccounts = CALCULATE(DISTINCTCOUNT(DimSubscription[account_id]), DimSubscription[status] = "Churned")
+			RETURN DIVIDE(ChurnedAccounts, TotalAccounts)
+		```
+		formatString: 0.0%
+
+	measure 'Total Subscription Events' = COUNTROWS(FactSubscriptionEvents)
+		formatString: #,0
+
+	measure 'Churn Events' = CALCULATE(COUNTROWS(FactSubscriptionEvents), FactSubscriptionEvents[event_type] = "Churn")
+		formatString: #,0
+
+	measure 'Upgrade Events' = CALCULATE(COUNTROWS(FactSubscriptionEvents), FactSubscriptionEvents[event_type] = "Upgrade")
+		formatString: #,0
+
+	measure 'Downgrade Events' = CALCULATE(COUNTROWS(FactSubscriptionEvents), FactSubscriptionEvents[event_type] = "Downgrade")
+		formatString: #,0
+
+	measure 'Renewal Events' = CALCULATE(COUNTROWS(FactSubscriptionEvents), FactSubscriptionEvents[event_type] = "Renewal")
+		formatString: #,0
+
+	measure 'Net MRR Movement EUR' = SUM(FactSubscriptionEvents[mrr_change_eur])
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Expansion MRR EUR' = CALCULATE(SUM(FactSubscriptionEvents[mrr_change_eur]), FactSubscriptionEvents[event_type] = "Upgrade")
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Contraction MRR EUR' = CALCULATE(SUM(FactSubscriptionEvents[mrr_change_eur]), FactSubscriptionEvents[event_type] IN {"Downgrade", "Churn"})
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Average Active User Ratio' = AVERAGE(FactMonthlyMetrics[active_user_ratio])
+		formatString: 0.0%
+
+	measure 'Total Active Users' = SUM(FactMonthlyMetrics[active_users])
+		formatString: #,0
+
+	measure 'Total Licensed Users' = SUM(FactMonthlyMetrics[licensed_users])
+		formatString: #,0
+
+	measure 'Average NPS Score' = AVERAGE(FactMonthlyMetrics[nps_score])
+		formatString: 0.0
+
+	measure 'Average Feature Adoption %' = AVERAGE(FactMonthlyMetrics[feature_adoption_pct])
+		formatString: 0.0%
+
+	measure 'Total API Calls' = SUM(FactMonthlyMetrics[api_calls])
+		formatString: #,0
+
+	measure 'Average Storage GB' = AVERAGE(FactMonthlyMetrics[storage_gb])
+		formatString: 0.00
+
+	measure 'Support Tickets' = DISTINCTCOUNT(FactSupportTickets[ticket_id])
+		formatString: #,0
+
+	measure 'Open Tickets' = CALCULATE([Support Tickets], FactSupportTickets[status] = "Open")
+		formatString: #,0
+
+	measure 'Closed Tickets' = CALCULATE([Support Tickets], FactSupportTickets[status] = "Closed")
+		formatString: #,0
+
+	measure 'Critical Tickets' = CALCULATE([Support Tickets], FactSupportTickets[severity] = "Critical")
+		formatString: #,0
+
+	measure 'Open Critical Tickets' = CALCULATE([Support Tickets], FactSupportTickets[status] = "Open", FactSupportTickets[severity] = "Critical")
+		formatString: #,0
+
+	measure 'Ticket Closure Rate %' = DIVIDE([Closed Tickets], [Support Tickets])
+		formatString: 0.0%
+
+	measure 'First Contact Resolution %' = DIVIDE(CALCULATE([Support Tickets], FactSupportTickets[first_contact_resolution] = TRUE()), CALCULATE([Support Tickets], FactSupportTickets[status] = "Closed"))
+		formatString: 0.0%
+
+	measure 'Escalation Rate %' = DIVIDE(CALCULATE([Support Tickets], FactSupportTickets[escalated] = TRUE()), [Support Tickets])
+		formatString: 0.0%
+
+	measure 'Average Resolution Hours' = AVERAGE(FactSupportTickets[resolution_hours])
+		formatString: 0.0
+
+	measure 'Tickets per Subscription' = DIVIDE([Support Tickets], [Active Subscriptions])
+		formatString: 0.00
+
+	measure 'Refund Requests' = DISTINCTCOUNT(FactRefunds[refund_id])
+		formatString: #,0
+
+	measure 'Approved Refunds' = CALCULATE([Refund Requests], FactRefunds[approved] = TRUE())
+		formatString: #,0
+
+	measure 'Refund Approval %' = DIVIDE([Approved Refunds], [Refund Requests])
+		formatString: 0.0%
+
+	measure 'Refund Amount EUR' = CALCULATE(SUM(FactRefunds[amount_eur]), FactRefunds[approved] = TRUE())
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'Average Refund EUR' = DIVIDE([Refund Amount EUR], [Approved Refunds])
+		formatString: €#,0.00
+
+	measure 'Refund Rate %' = DIVIDE([Refund Requests], [Support Tickets])
+		formatString: 0.0%
+
+	measure 'Subscription Health Score' = ```
+			VAR ChurnRisk = [Churn Rate %]
+			VAR LowAdoption = CALCULATE([Average Feature Adoption %]) < 0.40
+			VAR HighRisk = CALCULATE([Revenue at Risk %]) > 0.20
+			VAR TicketsHigh = CALCULATE([Tickets per Subscription]) > 3
+			RETURN MAX(0, 100 - IF(ChurnRisk > 0.1, 30, 0) - IF(LowAdoption, 20, 0) - IF(HighRisk, 25, 0) - IF(TicketsHigh, 15, 0))
+		```
+		formatString: 0
+
+	measure 'Health Score Color' = ```
+			VAR Score = [Subscription Health Score]
+			RETURN SWITCH(TRUE(), Score >= 80, "#1AAB40", Score >= 60, "#118DFF", Score >= 40, "#E66C37", "#D64550")
+		```
+		formatString: @
+
+	measure 'Live Active Sessions' = CALCULATE(COUNTROWS(FactLiveActivity), FactLiveActivity[status] = "Active Session")
+		formatString: #,0
+
+	measure 'Live Idle Sessions' = CALCULATE(COUNTROWS(FactLiveActivity), FactLiveActivity[status] = "Idle")
+		formatString: #,0
+
+	measure 'Live Connected Subscriptions' = COUNTROWS(FactLiveActivity)
+		formatString: #,0
+
+	measure 'Live Total Active Users' = SUM(FactLiveActivity[active_users])
+		formatString: #,0
+
+	measure 'Live Avg Session Duration Min' = AVERAGE(FactLiveActivity[session_duration_min])
+		formatString: 0.0
+
+	measure 'Live API Requests/Hour' = SUM(FactLiveActivity[api_requests_last_hour])
+		formatString: #,0
+
+	measure 'MRR Previous Month EUR' = CALCULATE([Monthly Revenue EUR], DATEADD(DimDate[date], -1, MONTH))
+		formatString: €#,0;(-€#,0);€0
+
+	measure 'MRR MoM Growth %' = DIVIDE([Monthly Revenue EUR] - [MRR Previous Month EUR], [MRR Previous Month EUR])
+		formatString: 0.0%
+
+	measure 'Tickets Previous Month' = CALCULATE([Support Tickets], DATEADD(DimDate[date], -1, MONTH))
+		formatString: #,0
+
+	measure 'Tickets MoM %' = DIVIDE([Support Tickets] - [Tickets Previous Month], [Tickets Previous Month])
+		formatString: 0.0%
+
+	measure 'Data Snapshot Date' = FORMAT(MAX(FactMonthlyMetrics[month_date]), "yyyy-MM-dd")
+		formatString: @
+
+	measure 'MRR Growth Target %' = 0.05
+		formatString: 0.0%
+
+	measure 'FCR Target %' = 0.75
+		formatString: 0.0%
+
+	measure 'Feature Adoption Target %' = 0.60
+		formatString: 0.0%
+
+	measure 'NPS Target' = 40
+		formatString: 0
+
+	partition KPI_Measures = m
+		mode: import
+		source =
+			let
+				Source = #table(type table [measure_table_key = Int64.Type], {{1}})
+			in
+				Source

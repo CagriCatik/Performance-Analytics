@@ -1,0 +1,29 @@
+# PowerBI
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+powerbi/**/*.pbix
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Data (generated — never commit raw data)
+data/raw/
+data/reference/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+*.suo

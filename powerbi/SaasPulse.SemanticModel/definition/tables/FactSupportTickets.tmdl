@@ -1,0 +1,95 @@
+table FactSupportTickets
+
+	column ticket_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ticket_id
+
+	column subscription_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: subscription_id
+
+	column account_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: account_id
+
+	column opened_at
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: opened_at
+
+	column closed_at
+		dataType: string
+		summarizeBy: none
+		sourceColumn: closed_at
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+
+	column severity
+		dataType: string
+		summarizeBy: none
+		sourceColumn: severity
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+
+	column resolution_hours
+		dataType: double
+		summarizeBy: none
+		sourceColumn: resolution_hours
+
+	column first_contact_resolution
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: first_contact_resolution
+
+	column escalated
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: escalated
+
+	column opened_date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: opened_date
+
+	column country
+		dataType: string
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: country
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+
+	column plan_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: plan_name
+
+	partition FactSupportTickets = m
+		mode: import
+		source =
+			let
+			    Source = Csv.Document(ReadProjectFile("raw/support_tickets.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+			    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+			    Types = Table.TransformColumnTypes(Headers, {
+			        {"ticket_id", type text}, {"subscription_id", type text}, {"account_id", type text},
+			        {"opened_at", type datetime}, {"closed_at", type text}, {"category", type text},
+			        {"severity", type text}, {"status", type text}, {"resolution_hours", type number},
+			        {"first_contact_resolution", type logical}, {"escalated", type logical},
+			        {"opened_date", type date}, {"country", type text}, {"region", type text},
+			        {"plan_name", type text}
+			    }, "en-US"),
+			    NormalizedCountry = Table.TransformColumns(Types, {{"country", NormalizeCountry}})
+			in
+			    NormalizedCountry

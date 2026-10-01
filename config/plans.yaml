@@ -1,0 +1,32 @@
+plans:
+  - name: Starter
+    tier: Entry
+    monthly_price_eur: 49.0
+    annual_price_eur: 499.0
+    max_users: 5
+    weight: 0.40
+    churn_base: 0.04
+
+  - name: Pro
+    tier: Growth
+    monthly_price_eur: 149.0
+    annual_price_eur: 1499.0
+    max_users: 25
+    weight: 0.35
+    churn_base: 0.025
+
+  - name: Business
+    tier: Scale
+    monthly_price_eur: 399.0
+    annual_price_eur: 3999.0
+    max_users: 100
+    weight: 0.18
+    churn_base: 0.015
+
+  - name: Enterprise
+    tier: Enterprise
+    monthly_price_eur: 999.0
+    annual_price_eur: 9999.0
+    max_users: 500
+    weight: 0.07
+    churn_base: 0.008

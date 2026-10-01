@@ -1,0 +1,24 @@
+regions:
+  - name: South
+    countries: [Germany, Austria, Switzerland]
+    cities:
+      - {name: Stuttgart, country: Germany, latitude: 48.7758, longitude: 9.1829}
+      - {name: Munich, country: Germany, latitude: 48.1351, longitude: 11.5820}
+      - {name: Vienna, country: Austria, latitude: 48.2082, longitude: 16.3738}
+      - {name: Zurich, country: Switzerland, latitude: 47.3769, longitude: 8.5417}
+  - name: West
+    countries: [France, Belgium, Netherlands]
+    cities:
+      - {name: Paris, country: France, latitude: 48.8566, longitude: 2.3522}
+      - {name: Brussels, country: Belgium, latitude: 50.8503, longitude: 4.3517}
+      - {name: Amsterdam, country: Netherlands, latitude: 52.3676, longitude: 4.9041}
+  - name: South-West
+    countries: [Spain]
+    cities:
+      - {name: Madrid, country: Spain, latitude: 40.4168, longitude: -3.7038}
+      - {name: Barcelona, country: Spain, latitude: 41.3874, longitude: 2.1686}
+  - name: South-East
+    countries: [Italy]
+    cities:
+      - {name: Milan, country: Italy, latitude: 45.4642, longitude: 9.1900}
+      - {name: Rome, country: Italy, latitude: 41.9028, longitude: 12.4964}

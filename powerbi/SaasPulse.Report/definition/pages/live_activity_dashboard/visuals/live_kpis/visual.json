@@ -1,0 +1,114 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "live_kpis",
+  "position": {
+    "x": 40,
+    "y": 25,
+    "z": 0,
+    "width": 1840,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Connected Subscriptions"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Connected Subscriptions",
+              "nativeQueryRef": "Live Connected Subscriptions",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Active Sessions"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Active Sessions",
+              "nativeQueryRef": "Live Active Sessions",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Idle Sessions"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Idle Sessions",
+              "nativeQueryRef": "Live Idle Sessions",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Total Active Users"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Total Active Users",
+              "nativeQueryRef": "Live Total Active Users",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live Avg Session Duration Min"
+                }
+              },
+              "queryRef": "KPI_Measures.Live Avg Session Duration Min",
+              "nativeQueryRef": "Live Avg Session Duration Min",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Live API Requests/Hour"
+                }
+              },
+              "queryRef": "KPI_Measures.Live API Requests/Hour",
+              "nativeQueryRef": "Live API Requests/Hour",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

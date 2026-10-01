@@ -1,0 +1,7 @@
+expression ProjectDataRoot = "C:\Users\mccat\Desktop\Performance-Analytics\data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+
+expression ReadProjectFile = (relativePath as text) as binary => File.Contents(ProjectDataRoot & "\" & Text.Replace(relativePath, "/", "\"))
+
+expression NormalizeCountry = (value as nullable text) as nullable text => let key = if value = null then null else Text.Upper(Text.Trim(value)), mapping = [DE="Germany", GERMANY="Germany", DEUTSCHLAND="Germany", FR="France", FRANCE="France", ES="Spain", SPAIN="Spain", IT="Italy", ITALY="Italy", AT="Austria", AUSTRIA="Austria", CH="Switzerland", SWITZERLAND="Switzerland", BE="Belgium", BELGIUM="Belgium", NL="Netherlands", NETHERLANDS="Netherlands"] in if key = null then null else Record.FieldOrDefault(mapping, key, Text.Proper(Text.Trim(value)))
+
+expression DataSnapshotDate = let manifest = Json.Document(ReadProjectFile("raw/manifest.json")), snapshot = Date.FromText(manifest[time_range][end]) in snapshot

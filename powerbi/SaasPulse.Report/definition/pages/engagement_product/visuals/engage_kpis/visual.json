@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "engage_kpis",
+  "position": {
+    "x": 40,
+    "y": 25,
+    "z": 0,
+    "width": 1340,
+    "height": 130,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average Active User Ratio"
+                }
+              },
+              "queryRef": "KPI_Measures.Average Active User Ratio",
+              "nativeQueryRef": "Average Active User Ratio",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average Feature Adoption %"
+                }
+              },
+              "queryRef": "KPI_Measures.Average Feature Adoption %",
+              "nativeQueryRef": "Average Feature Adoption %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average NPS Score"
+                }
+              },
+              "queryRef": "KPI_Measures.Average NPS Score",
+              "nativeQueryRef": "Average NPS Score",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Total API Calls"
+                }
+              },
+              "queryRef": "KPI_Measures.Total API Calls",
+              "nativeQueryRef": "Total API Calls",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average Storage GB"
+                }
+              },
+              "queryRef": "KPI_Measures.Average Storage GB",
+              "nativeQueryRef": "Average Storage GB",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
